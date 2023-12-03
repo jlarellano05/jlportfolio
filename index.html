@@ -1,0 +1,135 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>JL Arellano</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      /* Additional style for background-position */
+    
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="name" href="#home">
+        JL<br />
+        Arellano
+      </a>
+      <nav>
+        <ul class="nav__links" id="navbar">
+          <li><a href="#about">About</a></li>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#contact">Contacts</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="flex">
+      <div class="container" id="home">
+        <h1 class="title">Full Stack Web Developer</h1>
+      </div>
+
+      <div class="content">
+        <div class="intro" id="about">
+          <h1>
+            Hello, I'm JL Arellano, a passionate third-year IT student on a
+            journey to become a Full-Stack Developer. With a blend of creative
+            thinking and technical prowess, I thrive on turning ideas into
+            innovative digital solutions. Welcome to my corner of the web, where
+            code meets creativity!
+          </h1>
+        </div>
+       
+        <div class="work" id="work">
+          
+          <span class="work1">
+            A Web Based Enrollment Management System for St. Blaise Community
+            Academy Inc.
+            <img class="workimg"src="img/stblaise.jpg">
+          </span>
+          </div>
+
+          <div class="contact" id="contact">
+            <ul>
+              <li><a class="link" href="https://www.facebook.com/jla5hahaha" data-text="Facebook" target="_blank">Facebook</a></li>
+              <li><a class="link" href="https://www.instagram.com/the.jl_/" data-text="Instagram" target="_blank">Instagram</a></li>
+              <li><a class="link" href="https://github.com/jlarellano05" data-text="Github" target="_blank">Github</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const container = document.querySelector(".container");
+        const title = document.querySelector(".title");
+        const nextDiv = document.querySelector(".intro");
+        let requestId;
+
+        function updateZoom() {
+          const scrollY = window.scrollY;
+          const nextDivTop = nextDiv.offsetTop;
+
+          // Check if the scroll position is above the next div
+          if (scrollY < nextDivTop) {
+            const scale = Math.min(1 + scrollY / 400, 100); // Increased scaling factor
+
+            title.style.transform = `scale(${scale})`;
+
+            if (scale > 1) {
+              const containerScale = Math.min(1 + (scale - 1) * 0.5, 3); // Increased scaling factor
+              const newPosition = 100 - scrollY / 2;
+              const newPositionX = 50;
+
+              container.style.transition = "none";
+              container.style.transform = `scale(${containerScale})`;
+              container.style.backgroundPosition = `${newPositionX}% ${newPosition}%`;
+
+              // Adjust opacity based on scroll position
+              const opacity = Math.max(1 - scrollY / 900, 0);
+              container.style.opacity = opacity;
+            } else {
+              container.style.transform = "scale(1)";
+              container.style.backgroundPosition = "50% 100%";
+              container.style.opacity = 1; // Reset opacity when not zoomed
+            }
+          } else {
+            // Stop the animation when scroll position is at or below the next div
+            title.style.transform = "scale(1)";
+            container.style.transition =
+              "background-size 0.3s ease, background-position 0.3s ease";
+            container.style.transform = "scale(1)";
+            container.style.backgroundPosition = "50% 100%";
+            container.style.opacity = 1;
+          }
+        }
+
+        function animate() {
+          requestId = requestAnimationFrame(function () {
+            updateZoom();
+            animate();
+          });
+        }
+
+        window.addEventListener("scroll", function () {
+          if (!requestId) {
+            animate();
+          }
+        });
+
+        // Pause the animation during the resize
+        window.addEventListener("resize", function () {
+          cancelAnimationFrame(requestId);
+          requestId = null;
+          updateZoom();
+        });
+
+   
+      });
+    </script>
+  </body>
+</html>
