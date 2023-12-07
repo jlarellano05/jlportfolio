@@ -9,10 +9,6 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="style.css" />
-    <style>
-      /* Additional style for background-position */
-    
-    </style>
   </head>
   <body>
     <header>
@@ -24,7 +20,7 @@
         <ul class="nav__links" id="navbar">
           <li><a href="#about">About</a></li>
           <li><a href="#work">Work</a></li>
-          <li><a href="#contact">Contacts</a></li>
+          <li><a href="#contact">Socials</a></li>
         </ul>
       </nav>
     </header>
@@ -74,14 +70,14 @@
           const scrollY = window.scrollY;
           const nextDivTop = nextDiv.offsetTop;
 
-          // Check if the scroll position is above the next div
+         
           if (scrollY < nextDivTop) {
-            const scale = Math.min(1 + scrollY / 400, 100); // Increased scaling factor
+            const scale = Math.min(1 + scrollY / 400, 100); 
 
             title.style.transform = `scale(${scale})`;
 
             if (scale > 1) {
-              const containerScale = Math.min(1 + (scale - 1) * 0.5, 3); // Increased scaling factor
+              const containerScale = Math.min(1 + (scale - 1) * 0.5, 3);
               const newPosition = 100 - scrollY / 2;
               const newPositionX = 50;
 
@@ -89,16 +85,16 @@
               container.style.transform = `scale(${containerScale})`;
               container.style.backgroundPosition = `${newPositionX}% ${newPosition}%`;
 
-              // Adjust opacity based on scroll position
+            
               const opacity = Math.max(1 - scrollY / 900, 0);
               container.style.opacity = opacity;
             } else {
               container.style.transform = "scale(1)";
               container.style.backgroundPosition = "50% 100%";
-              container.style.opacity = 1; // Reset opacity when not zoomed
+              container.style.opacity = 1; 
             }
           } else {
-            // Stop the animation when scroll position is at or below the next div
+           
             title.style.transform = "scale(1)";
             container.style.transition =
               "background-size 0.3s ease, background-position 0.3s ease";
@@ -121,7 +117,7 @@
           }
         });
 
-        // Pause the animation during the resize
+       
         window.addEventListener("resize", function () {
           cancelAnimationFrame(requestId);
           requestId = null;
